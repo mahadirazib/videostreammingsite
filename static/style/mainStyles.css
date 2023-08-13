@@ -1,0 +1,99 @@
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+
+table{
+    margin: 10px 0;
+}
+
+td{
+    padding: 5px 10px;
+    margin: 0 10px;
+}
+
+.mainBox{
+    min-height: 500px;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.commentSection{
+    max-height: 600px;
+    overflow-y: scroll;
+}
+
+.info{
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.videos{
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.proPic{
+    width: 300px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 50px;
+}
+
+.toCategorirsPage{
+    color: black;
+}
+
+.toCategorirsPage:hover{
+    text-decoration: none;
+    color: rgb(44, 148, 51);;
+}
+
+.headingWithlimit {
+    display: inline-block;
+    width: 15ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.paragraphWithlimit20 {
+    display: inline-block;
+    width: 20ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
+.paragraphWithlimit {
+    display: inline-block;
+    width: 100ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+.categories{
+    display: inline-block;
+    color: rgb(44, 148, 51);
+    padding: 10px; width: 100%;
+    background-color: rgb(216, 225, 211);
+}
+
+.categoryActive{
+    display: inline-block;
+    color: white;
+    padding: 10px; width: 100%;
+    background-color:rgb(33, 82, 36);
+}
+
+.categories:hover, .categoryActive:hover{
+    color: white;
+    background-color: rgb(14, 58, 17);
+    text-decoration: none;
+}

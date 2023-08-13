@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+
+
+
+{% block navleft_block %}        
+    <a href="{% url 'userAuth:loginFunction' %}" class="btn btn-success my-2 my-sm-0" >Log in</a>
+{% endblock %}
+
+
+
+
+{% block body_block %}
+
+
+<div class="container-fluid">
+
+    <div class="text-center">
+        {% if userform.errors %}
+            {% for fi in userform %}
+                {% for error in fi.errors %}
+                    <h1 style="margin-top: 30px;">{{ error }}</h1>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+    </div>
+
+
+
+
+
+    <div style="width: 100%; padding: 30px 0;">
+
+        <section class="" style="width: 70%; margin: 0 auto;">
+
+            <div class="card mx-4 mx-md-5 shadow-5-strong" style="background: hsla(0, 0%, 100%, 0.8);backdrop-filter: blur(30px);">
+    
+                <div class="card-body py-5 px-md-5">
+    
+                    <div class="row d-flex justify-content-center">
+    
+                        <div class="col-lg-8">
+                    
+                            <h2 class="fw-bold mb-5">Sign up now</h2>
+                            <form method="POST" enctype="multipart/form-data">
+
+
+                                <div class="row">
+                                    
+                                    {% for inp in userform %}
+                                    <div class="form-outline mb-4" style="width: 100%;">
+                                        {{inp}}
+                                    </div>
+                                    {% endfor %}
+
+                                    <div class="form-outline mb-4" style="width: 100%;">
+                                        {{userform2.phone}}
+                                    </div>
+
+                                    <div class="form-outline mb-4" style="width: 100%;">
+                                        <div class="row">
+                                            <div class="col-lg-3">Gender: </div>
+                                            <div class="col-lg-9">{{userform2.gender}}</div>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-outline mb-4" style="width: 100%;">
+                                        <div class="row">
+                                            <div class="col-lg-3">Profile picture: </div>
+                                            <div class="col-lg-9">{{userform2.proPic}}</div>
+                                            
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                        
+                                {% csrf_token %}
+    
+                                <button type="submit" class="btn btn-success btn-block mb-4">
+                                    {{ btntext }}
+                                </button>
+                            
+                            </form>
+                                
+                        </div>
+    
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+        </section>
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}
+

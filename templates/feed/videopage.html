@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+{% load static %}
+{% load embed_video_tags %}
+
+
+
+
+
+{% block nav_block_nonuser %}
+
+<form class="form-inline my-2 my-lg-0 ml-auto">
+    <a href="{% url 'userAuth:loginFunction' %}" class="btn btn-success my-2 my-sm-0" >Log in</a>
+</form>
+
+{% endblock %}
+
+
+
+
+
+{% block body_block %}
+
+
+<div class="container">
+    
+    <div class="row">
+        
+        <div class="col-lg-9 col-md-12 col-sm-12 text-left pl-5 mt-5 pr-5">
+        
+            <div class="text-left pl-5">
+                
+                <h1>{{ vid.title }}</h1>
+
+                {% if author %}
+                
+                <div class="d-flex justify-content-end mt-2">
+                    <a href="{% url 'feed:editVideo' id=vid.id %}" class="btn btn-success mr-5">Edit Video</a>
+                    <a href="{% url 'feed:deletVideo' id=vid.id %}" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete Video</a>
+                </div>
+
+                {% endif %}
+
+                <p>Uploaded by: {{ vid.user }} </p>
+                <p>
+                    Category: 
+                    {% for i in category %}
+                    <span style="background-color: rgb(189, 239, 187); margin: 5px; padding: 0 5px;"> {{ i.catagory.title }} </span>
+                    {% endfor %}
+                </p>
+                
+                {% video vid.video "100%x400px" %}
+                
+                <p class="videoDescription"> {{ vid.description|linebreaks }} </p>
+
+            </div>
+            
+        
+            <div class="pl-5 mt-5">
+    
+                <form method="POST">
+    
+                    <div class="">
+                        <textarea name="comment" id="comment" class="form-control" style="width: 100%; display: inline-block;"></textarea>
+                    </div>
+        
+                    {% csrf_token %}
+        
+                    <button type="submit" name="submit" class="btn btn-primary">Comment</button>
+    
+                </form>
+    
+            </div>
+        
+            <div class="text-left pl-5 mt-3 mb-5">
+        
+                <div class="commentSection">
+    
+                    {% for i in comments %}
+    
+                        <div class="">
+    
+                            <p class="mb-0 mt-5">
+                                <span style="font-weight: bold; color: rgb(44, 148, 51);"> {{ i.user.first_name }} {{ i.user.last_name }}: </span>
+                            </p>
+                            
+                            <p class="">
+                                {{ i.comment|linebreaks }}
+                            </p>
+    
+                        </div>
+                        
+                    {% endfor %}
+        
+                </div>
+    
+        
+            </div>
+
+                
+        </div>
+
+
+
+
+    
+        <div class="col-lg-3 col-md-12 col-sm-12 mt-5">
+
+            <h4 class="mb-3">suggestions: </h4>
+
+            {% for i in videos %}
+                <div class="mb-5">
+
+                    <div style=" width: fit-content; border-radius: 10px; overflow: hidden;">
+                        {% video i.video "200x150" %}
+                    </div>
+
+                    <a  href="{% url 'feed:seeVideo' id=i.id %}" style="font-weight: bold; color: rgb(44, 148, 51);" class="headingWithlimit"> {{ i.title }} </a>
+                    
+                </div>
+            {% endfor %}
+
+        </div>
+    
+    </div>
+
+</div>
+    
+    
+
+
+
+
+{% endblock %}

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+{% load static %}
+{% load embed_video_tags %}
+
+
+
+
+{% block nav_block_nonuser %}
+
+<form class="form-inline my-2 my-lg-0 ml-auto">
+    <a href="{% url 'userAuth:loginFunction' %}" class="btn btn-success my-2 my-sm-0" >Log in</a>
+</form>
+
+{% endblock %}
+
+
+
+
+{% block body_block %}
+
+<div class="container-fluid">
+
+    <div class="container">
+
+
+        <div class="row mt-5">
+
+            <div class="col-lg-3 col-sm-12 mb-5">
+
+                <h3>Categories: </h3>
+
+                <div>
+
+                    {% if user.is_authenticated %}
+                    
+                    <div class="mb-3">
+                        <a href="?uservideo=yes" 
+    
+                        {% if uservideo %}
+                        class="categoryActive"
+                        {% else %}
+                        class="categories"
+                        {% endif %}
+                        >My videos</a>
+                    </div>
+
+                    {% endif %}
+    
+                    <div class="mb-3">
+                        <a href="?popular=yes" 
+    
+                        {% if popular %}
+                        class="categoryActive"
+                        {% else %}
+                        class="categories"
+                        {% endif %}
+                        >Most Popular</a>
+                    </div>
+    
+                    {% for i in category %}
+    
+                        {% if i.title == active %}
+                            <div class="mb-3">
+                                <a href="?category={{ i.id }}" class="categoryActive">{{ i.title }}</a>
+                            </div>
+                        {% else %}
+                            <div class="mb-3">
+                                <a href="?category={{ i.id }}" class="categories">{{ i.title }}</a>
+                            </div>
+                        {% endif %}
+    
+                    {% endfor %}
+
+                </div>
+
+
+            </div>
+
+            <div class="col-lg-9 col-sm-12">
+
+                {% if search %}
+                    <h1>Result for {{ search }}:</h1>
+                {% else %}
+                    <h1>Latest Videos:</h1>
+                {% endif %}
+
+                <div class="" style="overflow-y: auto">
+                    {% for i in videos %}
+                    <div style="display: inline-block; width: fit-content;">
+                        <div class="">
+                            {% video i.video "200x150" %}
+                        </div>
+                        <a href="{% url 'feed:seeVideo' id=i.id %}" style="font-weight: bold; color: rgb(44, 148, 51);" class="headingWithlimit"> {{ i.title }} </a>
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+    
+        
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+</div>
+
+{% endblock %}

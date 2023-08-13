@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+
+{% load static %}
+{% load embed_video_tags %}
+
+
+
+{% block body_block %}
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        
+        <div class="info col-lg-3 col-md-4 col-sm-12">
+    
+            <img src="/media/{{ myMoreInfo.proPic }}" alt="Profile Pic" class="proPic">
+    
+            <h2 class="text-center"> {{ myinfo.first_name }} {{ myinfo.last_name }} </h2>
+    
+            <table style="width: 100%; overflow: hidden;">
+                <tr>
+                    <td>Username:</td>
+                    <td class="paragraphWithlimit20">{{ myinfo.username }}</td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td class="paragraphWithlimit20">{{ myinfo.email }}</td>
+                </tr>
+                <tr>
+                    <td>Mobile:</td>
+                    <td class="paragraphWithlimit20">{{ myMoreInfo.phone }}</td>
+                </tr>
+                <tr>
+                    <td>Gender:</td>
+                    <td class="paragraphWithlimit20">{{ myMoreInfo.gender }}</td>
+                </tr>
+
+            </table>
+    
+            <a href="{% url 'userAuth:editFunction' %}" class="btn btn-success btn-block" >Edit Profile</a>
+    
+        </div>
+        
+        
+        
+        <div class="videos  col-lg-9 col-md-8 col-sm-12">
+
+            {% if usedHasVideo %}
+
+            <div class="userVideo mb-5">
+
+                <a href="{% url 'feed:videosOnSearch' %}?uservideo=yes" class="toCategorirsPage"><h2>&gt;&gt;Your Videos </h2></a>
+
+                <div class="row" style="overflow-y: auto">
+                    <div class="d-flex flex-nowrap">
+                        {% for i in userVideo %}
+                        <div class="" style="margin-right: 20px;">
+                            <div>
+                                {% video i.video "200x150" %}
+                            </div>
+                            <a href="{% url 'feed:seeVideo' id=i.id %}" style="font-weight: bold; color: rgb(44, 148, 51);" class="headingWithlimit"> {{ i.title }} </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+            </div>
+            
+            {% endif %}
+            
+            
+            
+            <div class="latestVideos mb-5">
+                
+                <a href="{% url 'feed:videosOnSearch' %}" class="toCategorirsPage"><h2>&gt;&gt;Latest Videos </h2></a>
+                
+                <div class="row" style="overflow-y: auto">
+                    <div class="d-flex flex-nowrap">
+                        {% for i in latestVideos %}
+                        <div class="flex-1" style="margin-right: 20px;">
+                            <div>
+                                {% video i.video "200x150" %}
+                            </div>
+                            <a href="{% url 'feed:seeVideo' id=i.id %}" style="font-weight: bold; color: rgb(44, 148, 51);" class="headingWithlimit"> {{ i.title }} </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+            </div>
+            
+            
+            
+            <div class="popularVideos mb-5">
+                
+                
+                <a href="{% url 'feed:videosOnSearch' %}?popular=yes" class="toCategorirsPage"><h2>&gt;&gt;Popular Videos </h2></a>
+
+                <div class="row" style="overflow-y: auto">
+                    <div class="d-flex flex-nowrap">
+                        {% for i in popularVideos %}
+                        <div class="" style="margin-right: 20px;">
+                            <div>
+                                {% video i.video "200x150" %}
+                            </div>
+                            <a href="{% url 'feed:seeVideo' id=i.id %}" style="font-weight: bold; color: rgb(44, 148, 51);" class="headingWithlimit"> {{ i.title }} </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                
+            </div>
+            
+            
+            
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}
